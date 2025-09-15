@@ -1,8 +1,8 @@
-package parkingLot;
+package problems.parkingLot;
 
 
-import parkingLot.vehicle.Vehicle;
-import parkingLot.vehicle.VehicleType;
+import problems.parkingLot.vehicle.Vehicle;
+import problems.parkingLot.vehicle.VehicleType;
 
 public class Spot {
 

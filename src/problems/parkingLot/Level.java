@@ -1,10 +1,10 @@
-package parkingLot;
-
-import parkingLot.vehicle.Vehicle;
-import parkingLot.vehicle.VehicleType;
+package problems.parkingLot;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import problems.parkingLot.vehicle.Vehicle;
+import problems.parkingLot.vehicle.VehicleType;
 
 public class Level {
 

@@ -1,4 +1,4 @@
-package parkingLot.vehicle;
+package problems.parkingLot.vehicle;
 
 public class Motorcycle extends  Vehicle{
 

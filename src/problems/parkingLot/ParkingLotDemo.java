@@ -1,6 +1,6 @@
-package parkingLot;
+package problems.parkingLot;
 
-import parkingLot.vehicle.*;
+import problems.parkingLot.vehicle.*;
 
 public class ParkingLotDemo {
 

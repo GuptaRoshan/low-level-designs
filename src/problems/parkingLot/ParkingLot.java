@@ -1,10 +1,10 @@
-package parkingLot;
+package problems.parkingLot;
 
-
-import parkingLot.vehicle.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import problems.parkingLot.vehicle.Vehicle;
 
 public class ParkingLot {
     private static ParkingLot instance;

@@ -75,18 +75,17 @@ class Level {
         int numberOfTruck = (int) (numberOfSpots * 0.4);
         int numberOfMotorcycle = (int) (numberOfSpots * 0.2);
 
-        for (int i = 1; i <= numberOfCars; i++) {
-            level.add(new Spot(i, VehicleType.CAR));
-        }
+        int spotId = 1;
 
-        for (int i = numberOfCars + 1; i <= numberOfCars + numberOfTruck; i++) {
-            level.add(new Spot(i, VehicleType.TRUCK));
+        for (; spotId <= numberOfCars; spotId++) {
+            level.add(new Spot(spotId, VehicleType.CAR));
         }
-
-        for (int i = numberOfCars + numberOfTruck + 1; i <= numberOfCars + numberOfTruck + numberOfMotorcycle; i++) {
-            level.add(new Spot(i, VehicleType.MOTORCYCLE));
+        for (; spotId <= numberOfCars + numberOfTruck; spotId++) {
+            level.add(new Spot(spotId, VehicleType.TRUCK));
         }
-
+        for (; spotId <= numberOfCars + numberOfTruck + numberOfMotorcycle; spotId++) {
+            level.add(new Spot(spotId, VehicleType.MOTORCYCLE));
+        }
     }
 
     public boolean parkVehicle(Vehicle vehicle) {
@@ -163,17 +162,17 @@ class Spot {
 }
 
 
-class ParkingLotService {
-    private static ParkingLotService instance;
+class ParkingLot {
+    private static ParkingLot instance;
     List<Level> levels;
 
-    private ParkingLotService() {
+    private ParkingLot() {
         this.levels = new ArrayList<>();
     }
 
-    public synchronized static ParkingLotService getInstance() {
+    public synchronized static ParkingLot getInstance() {
         if (instance == null) {
-            instance = new ParkingLotService();
+            instance = new ParkingLot();
         }
         return instance;
     }
@@ -208,26 +207,26 @@ class ParkingLotService {
 }
 
 
-public class ParkingLot {
+public class ParkingLotService {
 
     public static void main(String[] args) {
-        ParkingLotService parkingLotService = ParkingLotService.getInstance();
-        parkingLotService.addLevel(new Level(1, 10));
+        ParkingLot parkingLot = ParkingLot.getInstance();
+        parkingLot.addLevel(new Level(1, 10));
 
-        parkingLotService.parkVehicle(new Car("DL102", "123", VehicleType.CAR));
-        parkingLotService.parkVehicle(new Truck("DL102", "123", VehicleType.TRUCK));
-        parkingLotService.parkVehicle(new Motorcycle("DL102", "123", VehicleType.MOTORCYCLE));
-        parkingLotService.parkVehicle(new Motorcycle("DL102", "123", VehicleType.MOTORCYCLE));
+        parkingLot.parkVehicle(new Car("DL102", "123", VehicleType.CAR));
+        parkingLot.parkVehicle(new Truck("DL102", "123", VehicleType.TRUCK));
+        parkingLot.parkVehicle(new Motorcycle("DL102", "123", VehicleType.MOTORCYCLE));
+        parkingLot.parkVehicle(new Motorcycle("DL102", "123", VehicleType.MOTORCYCLE));
 
         Vehicle car = new Car("DL102", "123", VehicleType.CAR);
-        parkingLotService.parkVehicle(car);
+        parkingLot.parkVehicle(car);
 
-        parkingLotService.displayAvailability();
+        parkingLot.displayAvailability();
 
-        parkingLotService.unParkVehicle(car);
+        parkingLot.unParkVehicle(car);
 
         System.out.println("\n");
 
-        parkingLotService.displayAvailability();
+        parkingLot.displayAvailability();
     }
 }

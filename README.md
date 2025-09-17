@@ -122,58 +122,66 @@ Here’s the information in a table format:
 
 # Low Level Design Problems
 
+## LFU Cache
 
-## 🚗 **Transportation & Delivery**
+### LFU Cache Example (Capacity = 2)
 
-- Ride-Sharing App (e.g., Uber)
-- Food Delivery App (e.g., Swiggy, Zomato)
+| Step | Operation | Returned | Cache Content (key → (value, freq)) | Eviction Rule Applied                                            |
+|------|-----------|----------|-------------------------------------|------------------------------------------------------------------|
+| 1    | put(1,1)  | –        | {1 → (1, freq=1)}                   | – (cache not full)                                               |
+| 2    | put(2,2)  | –        | {1 → (1, freq=1), 2 → (2, freq=1)}  | – (cache not full)                                               |
+| 3    | get(1)    | 1        | {1 → (1, freq=2), 2 → (2, freq=1)}  | – (just freq increment)                                          |
+| 4    | put(3,3)  | –        | {1 → (1, freq=2), 3 → (3, freq=1)}  | **Evict key=2** → lowest freq=1                                  |
+| 5    | get(2)    | -1       | {1 → (1, freq=2), 3 → (3, freq=1)}  | – (already evicted)                                              |
+| 6    | get(3)    | 3        | {1 → (1, freq=2), 3 → (3, freq=2)}  | – (just freq increment)                                          |
+| 7    | put(4,4)  | –        | {3 → (3, freq=2), 4 → (4, freq=1)}  | **Evict key=1** → tie (keys 1 & 3 both freq=2) → **LRU = key 1** |
+| 8    | get(1)    | -1       | {3 → (3, freq=2), 4 → (4, freq=1)}  | – (already evicted)                                              |
+| 9    | get(3)    | 3        | {3 → (3, freq=3), 4 → (4, freq=1)}  | – (just freq increment)                                          |
+| 10   | get(4)    | 4        | {3 → (3, freq=3), 4 → (4, freq=2)}  | – (just freq increment)                                          |
 
-## 📱 **Social Media**
 
-- WhatsApp
-- Twitter
-- Facebook
+### 🔑 Key Observations
 
-## 💬 **Communication Tools**
+1. **Step 4 (put 3)** → Evicted `2` because it had the lowest frequency (freq=1 vs. key=1’s freq=2).
+   *Rule: LFU eviction.*
+2. **Step 7 (put 4)** → Both `1` and `3` had freq=2.
 
-- Zoom
-- Google Docs
-- Gmail
-- Event Calendar
+   Tie → Evict the **Least Recently Used (LRU)** → `1`.
+   *Rule: LFU tie → LRU eviction.*
 
-## 🎬 **Entertainment**
 
-- Video Streaming Platform
-- Music Streaming App (e.g., Spotify)
 
-## 🧰 **Utilities & Productivity**
+## LRU Cache
 
-- Dropbox (Cloud Storage)
-- Splitwise (Expense Sharing)
-- Google Maps (Navigation)
-- Blockchain System
 
-## 🏢 **Management Systems**
+## Rate Limiter
 
-- Parking Lot
-- Car Rental
-- ATM
-- Restaurant Management
-- Airline Management
 
-## ⏱️ **Real-Time & Scheduling**
+## Pub Sub System
 
-- Elevator System
-- Traffic Signal Control
 
-## 🛒 **E-Commerce & Transactions**
+## File System
 
-- Vending Machine
-- Online Shopping (e.g., Amazon)
-- Movie Ticket Booking
 
-## 🎮 **Games**
+## Elevator
 
-- Tic Tac Toe
-- Snake & Ladder
-- Chess
+
+## Chess Game Engine
+
+
+## Splitwise-style Expense Sharing System
+
+
+## Logging System
+
+
+## Tic Tac Toe
+
+
+## ATM
+
+
+## Vending Machine
+
+
+## Ride Sharing

@@ -4,7 +4,6 @@ package designPatterns;
 // Pizza interface representing the core pizza functionality
 interface Pizza {
     String getDescription(); // Describes the pizza
-
     double getCost(); // Returns the cost of the pizza
 }
 

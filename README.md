@@ -150,38 +150,28 @@ Here’s the information in a table format:
    *Rule: LFU tie → LRU eviction.*
 
 
-
-## LRU Cache
-
-
-## Rate Limiter
-
-
 ## Pub Sub System
-
-
-## File System
-
 
 ## Elevator
 
-
 ## Chess Game Engine
 
-
-## Splitwise-style Expense Sharing System
-
+## Splitwise
 
 ## Logging System
 
-
-## Tic Tac Toe
-
+## Tic-Tac-Toe
 
 ## ATM
 
-
 ## Vending Machine
 
-
 ## Ride Sharing
+
+
+Multi threading / Concurrency Questions
+
+
+- Rate Limiter
+    - Build a per-user or global rate limiter that allows N requests per second.
+    - Variants: token bucket, leaky bucket, sliding window.

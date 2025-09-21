@@ -40,14 +40,11 @@ class Singleton0 {
 
 
 class Singleton1 {
-    private Singleton1() {
-    }
+    private static final Singleton1 INSTANCE = new Singleton1();  // eager initialization
+
+    private Singleton1() { }
 
     public static Singleton1 getInstance() {
-        return Holder.INSTANCE;
-    }
-
-    private static class Holder {
-        private static final Singleton1 INSTANCE = new Singleton1();
+        return INSTANCE;
     }
 }

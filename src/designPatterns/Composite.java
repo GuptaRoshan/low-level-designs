@@ -57,7 +57,7 @@ class Directory implements FileComponent {
         System.out.println("Folder: " + name);
 
         for (FileComponent component : components) {
-            component.display();
+            component.display(); // If its a file it will print its name, if its directory it will make recursive call
         }
     }
 

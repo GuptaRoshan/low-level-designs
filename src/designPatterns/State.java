@@ -1,68 +1,124 @@
 package designPatterns;
 
-/*
- * State Design Pattern
- *
- * Definition:
- * The State Pattern allows an object to change its behavior when its internal state changes.
- * It encapsulates state-specific behavior into separate classes.
- *
- * Real-World Analogy:
- * Traffic Signal: A traffic light changes its behavior based on its current state (Green, Yellow, or Red).
- * Each state determines what vehicles and pedestrians should do.
+/**
+ * TrafficSignalSystem.java
+ * -------------------
+ * A simple traffic signal system using State Pattern.
+ * <p>
+ * Patterns used:
+ * - State pattern: states like Red, Green, Yellow
+ * <p>
+ * Features:
+ * - Cycle between red → green → yellow → red
+ * - Timer-based step simulation
+ * <p>
+ * To run:
+ * javac TrafficSignalSystem.java
+ * java TrafficSignalSystem
  */
 
 // State interface
-interface TrafficLightState {
-    void changeColor();
+interface SignalState {
+    void next(TrafficSignal signal);
+
+    String name();
 }
 
-// Concrete State classes
-class RedState implements TrafficLightState {
-    @Override
-    public void changeColor() {
-        System.out.println("Stop! Red Light");
-    }
-}
+// Red state
+class RedState implements SignalState {
+    private static final RedState INST = new RedState();
 
-class YellowState implements TrafficLightState {
-    @Override
-    public void changeColor() {
-        System.out.println("Prepare to stop. Yellow Light");
-    }
-}
-
-class GreenState implements TrafficLightState {
-    @Override
-    public void changeColor() {
-        System.out.println("Go! Green Light");
-    }
-}
-
-// Context class
-class TrafficLight {
-    private TrafficLightState currentState;
-
-    public TrafficLight() {
-        // Start with red state
-        currentState = new RedState();
+    private RedState() {
     }
 
-    public void setState(TrafficLightState state) {
-        this.currentState = state;
+    static RedState instance() {
+        return INST;
     }
 
-    public void changeColor() {
-        currentState.changeColor();
+    public void next(TrafficSignal signal) {
+        System.out.println("Switching from RED to GREEN");
+        signal.changeState(GreenState.instance());
+    }
+
+    public String name() {
+        return "Red";
     }
 }
 
+//------------------
 
-public class State {
-    public static void main(String[] args) {
-        TrafficLight trafficLight = new TrafficLight();
-        trafficLight.changeColor();
-        trafficLight.setState(new YellowState());
-        trafficLight.changeColor();
+// Green state
+class GreenState implements SignalState {
+    private static final GreenState INST = new GreenState();
+
+    private GreenState() {
+    }
+
+    static GreenState instance() {
+        return INST;
+    }
+
+    public void next(TrafficSignal signal) {
+        System.out.println("Switching from GREEN to YELLOW");
+        signal.changeState(YellowState.instance());
+    }
+
+    public String name() {
+        return "Green";
+    }
+}
+
+//------------------
+
+// Yellow state
+class YellowState implements SignalState {
+    private static final YellowState INST = new YellowState();
+
+    private YellowState() {
+    }
+
+    static YellowState instance() {
+        return INST;
+    }
+
+    public void next(TrafficSignal signal) {
+        System.out.println("Switching from YELLOW to RED");
+        signal.changeState(RedState.instance());
+    }
+
+    public String name() {
+        return "Yellow";
+    }
+}
+
+
+class TrafficSignal {
+    private SignalState state = RedState.instance();
+
+    public void changeState(SignalState newState) {
+        System.out.printf("State change: %s -> %s\n", state.name(), newState.name());
+        this.state = newState;
+    }
+
+    public void step() {
+        state.next(this);
+    }
+
+    public void printStatus() {
+        System.out.printf("Current Signal: %s\n", state.name());
+    }
+
+
+}
+
+class state {
+    public static void main(String[] args) throws InterruptedException {
+        TrafficSignal signal = new TrafficSignal();
+
+        for (int i = 0; i < 6; i++) {
+            signal.printStatus();
+            Thread.sleep(1000);
+            signal.step();
+        }
     }
 }

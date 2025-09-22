@@ -40,7 +40,7 @@ public class BoundedBlockingQueue {
     public static void main(String[] args) throws InterruptedException {
         final BoundedBlockingQueue queue = new BoundedBlockingQueue(5);
         ExecutorService executor = Executors.newFixedThreadPool(4);
-
+        
         Runnable producerTask = () -> {
             for (int i = 0; i < 20; i++) {
                 try {

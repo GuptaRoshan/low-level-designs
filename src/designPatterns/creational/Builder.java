@@ -1,12 +1,12 @@
-package designPatterns;
+package designPatterns.creational;
 
 @SuppressWarnings("all")
-class House0 {
+class House {
     private final String foundation;
     private final String structure;
     private final String roof;
 
-    private House0(HouseBuilder builder) {
+    private House(HouseBuilder builder) {
         this.foundation = builder.foundation;
         this.structure = builder.structure;
         this.roof = builder.roof;
@@ -32,8 +32,8 @@ class House0 {
             return this;
         }
 
-        public House0 build() {
-            return new House0(this);
+        public House build() {
+            return new House(this);
         }
     }
 }
@@ -42,7 +42,7 @@ class House0 {
 public class Builder {
 
     public static void main(String[] args) {
-        House0 house = new House0.HouseBuilder().setFoundation("Concrete").setStructure("Wood").setRoof("Tiles").build();
+        House house = new House.HouseBuilder().setFoundation("Concrete").setStructure("Wood").setRoof("Tiles").build();
     }
 
 }

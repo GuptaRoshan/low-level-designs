@@ -1,4 +1,4 @@
-package designPatterns;
+package designPatterns.structural;
 
 
 // Pizza interface representing the core pizza functionality

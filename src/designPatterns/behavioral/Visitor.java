@@ -1,4 +1,4 @@
-package designPatterns;
+package designPatterns.behavioral;
 
 // Base interface for all assets
 interface Asset {

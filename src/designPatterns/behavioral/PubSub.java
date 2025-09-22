@@ -1,4 +1,4 @@
-package designPatterns;
+package designPatterns.behavioral;
 
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ class Subject {
 }
 
 
-public class Observer0 {
+public class PubSub {
 
     public static void main(String[] args) {
         Subject subject = new Subject();
